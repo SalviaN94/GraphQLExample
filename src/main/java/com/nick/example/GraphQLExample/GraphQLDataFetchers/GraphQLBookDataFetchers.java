@@ -36,4 +36,13 @@ public class GraphQLBookDataFetchers {
             return bookService.createBook(new Book(name, pageCount));
         };
     }
+
+    public DataFetcher createBookFullFetcher(){
+        return dataFetchingEnvironment -> {
+            Book book = dataFetchingEnvironment.getArgument("book");
+            System.out.println(book);
+
+            return bookService.createBook(book);
+        };
+    }
 }

@@ -3,6 +3,7 @@ package com.nick.example.GraphQLExample.Entity;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Author {
@@ -60,5 +61,19 @@ public class Author {
 
     public void removeBooks(Book book){
         this.books.remove(book);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Author author = (Author) o;
+        return firstName.equals(author.firstName) &&
+                lastName.equals(author.lastName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName);
     }
 }

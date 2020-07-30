@@ -5,13 +5,13 @@ type Query{
 
 type Mutation{
     createBook(name: String, pageCount: Int):Book
+    createBookFull(book: BookIn):Book
 }
 
 input BookIn{
     name: String
     pageCount: Int
 }
-
 
 type Book {
     id: ID
