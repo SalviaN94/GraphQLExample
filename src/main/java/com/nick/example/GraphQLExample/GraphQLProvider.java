@@ -80,6 +80,10 @@ public class GraphQLProvider {
                         .dataFetcher("createBook", graphQLBookDataFetchers.createBookDataFetcher()))
                 .type("Mutation", typeWiring -> typeWiring
                         .dataFetcher("createBookFull", graphQLBookDataFetchers.createBookFullFetcher()))
+                .type("Mutation", typeWiring -> typeWiring
+                        .dataFetcher("updateBook", graphQLBookDataFetchers.updateBookDataFetcher()))
+                .type("Mutation", typeWiring -> typeWiring
+                        .dataFetcher("deleteBook", graphQLBookDataFetchers.deleteBookDataFetcher()))
                 .build();
     }
 }

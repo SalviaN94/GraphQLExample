@@ -8,6 +8,8 @@ import graphql.schema.DataFetcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.xml.crypto.Data;
+
 @Component
 public class GraphQLBookDataFetchers {
 
@@ -34,6 +36,24 @@ public class GraphQLBookDataFetchers {
             int pageCount = dataFetchingEnvironment.getArgument("pageCount");
 
             return bookService.createBook(new Book(name, pageCount));
+        };
+    }
+
+    public DataFetcher updateBookDataFetcher(){
+        return dataFetchingEnvironment -> {
+            long id = Long.parseLong(dataFetchingEnvironment.getArgument("id"));
+            String name = dataFetchingEnvironment.getArgument("name");
+            int pageCount = dataFetchingEnvironment.getArgument("pageCount");
+
+            return bookService.updateBook(new Book(id, name, pageCount));
+        };
+    }
+
+    public DataFetcher deleteBookDataFetcher(){
+        return dataFetchingEnvironment -> {
+            long id = Long.parseLong(dataFetchingEnvironment.getArgument("id"));
+
+            return bookService.deleteBook(id);
         };
     }
 

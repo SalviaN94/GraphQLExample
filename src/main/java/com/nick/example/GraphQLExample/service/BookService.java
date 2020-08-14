@@ -26,6 +26,19 @@ public class BookService {
         return existingBook;
     }
 
+    @Transactional
+    public Book updateBook(Book book){
+        this.bookRepository.save(book);
+        return book;
+    }
+
+    @Transactional
+    public Book deleteBook(long id){
+        Book book = this.bookRepository.findById(id).get();
+        this.bookRepository.deleteById(id);
+        return book;
+    }
+
     @Transactional(readOnly = true)
     public List<Book> getAllBooks(){
         return this.bookRepository.findAll().stream().collect(Collectors.toList());

@@ -23,6 +23,12 @@ public class Book {
 
     }
 
+    public Book(Long id, String name, int pageCount) {
+        this.id = id;
+        this.name = name;
+        this.pageCount = pageCount;
+    }
+
     public Book(String name, int pageCount){
         this.name = name;
         this.pageCount = pageCount;
