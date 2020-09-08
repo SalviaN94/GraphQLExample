@@ -6,3 +6,6 @@ GraphQL java with spring boot and h2 database.
 Endpoint: localhost:8080/graphql
 
 Under development.
+
+
+## Changes
