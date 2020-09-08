@@ -23,13 +23,13 @@ class AuthorServiceTest {
     @Test
     @DirtiesContext
     void createNonExistingAuthor() {
-        Author author = authorService.createAuthor("Nick", "Salvia");
+        Author author = authorService.createAuthor(new Author("Nick", "Salvia"));
         assertNotNull(author);
     }
 
     @Test
     void createExistingAuthor() {
-        Author author = authorService.createAuthor("John", "Doe");
+        Author author = authorService.createAuthor(new Author("John", "Doe"));
         assertNotNull(author);
     }
 

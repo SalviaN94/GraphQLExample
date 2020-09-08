@@ -4,11 +4,15 @@ import com.nick.example.GraphQLExample.Entity.Book;
 import com.nick.example.GraphQLExample.repository.BookRepository;
 import com.nick.example.GraphQLExample.service.AuthorService;
 import com.nick.example.GraphQLExample.service.BookService;
+import graphql.execution.DataFetcherResult;
 import graphql.schema.DataFetcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.xml.crypto.Data;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @Component
 public class GraphQLBookDataFetchers {
@@ -30,39 +34,35 @@ public class GraphQLBookDataFetchers {
         };
     }
 
-    public DataFetcher createBookDataFetcher() {
+    public DataFetcher createBookDataFetcher(){
         return dataFetchingEnvironment -> {
-            String name = dataFetchingEnvironment.getArgument("name");
-            int pageCount = dataFetchingEnvironment.getArgument("pageCount");
-
-            return bookService.createBook(new Book(name, pageCount));
+            LinkedHashMap<String, Object> book = dataFetchingEnvironment.getArgument("input");
+            Book createBook = bookService.createBook(new Book((String)book.get("name"), (Integer)book.get("pageCount")));
+            LinkedHashMap<String, Object> returnedMap = new LinkedHashMap<>();
+            returnedMap.put("book", createBook);
+            return returnedMap;
         };
     }
 
     public DataFetcher updateBookDataFetcher(){
         return dataFetchingEnvironment -> {
-            long id = Long.parseLong(dataFetchingEnvironment.getArgument("id"));
-            String name = dataFetchingEnvironment.getArgument("name");
-            int pageCount = dataFetchingEnvironment.getArgument("pageCount");
-
-            return bookService.updateBook(new Book(id, name, pageCount));
+            LinkedHashMap<String, Object> book = dataFetchingEnvironment.getArgument("input");
+            Book updatedBook = bookService.updateBook(new Book(Long.parseLong((String)book.get("id")), (String)book.get("name"),
+                    (int)book.get("pageCount")));
+            LinkedHashMap<String, Object> returnedMap = new LinkedHashMap<>();
+            returnedMap.put("book", updatedBook);
+            return returnedMap;
         };
     }
 
     public DataFetcher deleteBookDataFetcher(){
         return dataFetchingEnvironment -> {
-            long id = Long.parseLong(dataFetchingEnvironment.getArgument("id"));
-
-            return bookService.deleteBook(id);
-        };
-    }
-
-    public DataFetcher createBookFullFetcher(){
-        return dataFetchingEnvironment -> {
-            Book book = dataFetchingEnvironment.getArgument("book");
-            System.out.println(book);
-
-            return bookService.createBook(book);
+            LinkedHashMap<String, Object> book = dataFetchingEnvironment.getArgument("input");
+            long id = Long.parseLong((String)book.get("id"));
+            Book deletedBook = bookService.deleteBook(id);
+            LinkedHashMap<String, Object> returnedMap = new LinkedHashMap<>();
+            returnedMap.put("book", deletedBook);
+            return returnedMap;
         };
     }
 }

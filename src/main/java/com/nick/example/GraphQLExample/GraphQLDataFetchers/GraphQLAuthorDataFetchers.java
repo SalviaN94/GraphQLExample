@@ -1,10 +1,13 @@
 package com.nick.example.GraphQLExample.GraphQLDataFetchers;
 
 import com.nick.example.GraphQLExample.Entity.Author;
+import com.nick.example.GraphQLExample.Entity.Book;
 import com.nick.example.GraphQLExample.service.AuthorService;
 import graphql.schema.DataFetcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.LinkedHashMap;
 
 @Component
 public class GraphQLAuthorDataFetchers {
@@ -28,10 +31,13 @@ public class GraphQLAuthorDataFetchers {
 
     public DataFetcher createAuthorDataFetcher() {
         return dataFetchingEnvironment -> {
-            String firstName = dataFetchingEnvironment.getArgument("firstName");
-            String lastName = dataFetchingEnvironment.getArgument("lastName");
+            LinkedHashMap<String, Object> author = dataFetchingEnvironment.getArgument("input");
+            Author createAuthor = authorService.createAuthor(new Author((String)author.get("firstName"),
+                    (String)author.get("lastName")));
+            LinkedHashMap<String, Object> returnedMap = new LinkedHashMap<>();
+            returnedMap.put("author", createAuthor);
+            return returnedMap;
 
-            return authorService.createAuthor(firstName, lastName);
         };
     }
 

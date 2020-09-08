@@ -20,13 +20,12 @@ public class AuthorService {
     private AuthorRepository authorRepository;
 
     @Transactional
-    public Author createAuthor(final String firstName, final String lastName){
-        Author author = authorRepository.findByFirstNameAndLastName(firstName, lastName);
-        if(author == null) {
-            author = new Author(firstName, lastName);
+    public Author createAuthor(Author author){
+        Author existingAuthor = authorRepository.findByFirstNameAndLastName(author.getFirstName(),author.getLastName());
+        if(existingAuthor == null) {
             return this.authorRepository.save(author);
         }
-        return author;
+        return existingAuthor;
     }
 
     @Transactional(readOnly = true)
