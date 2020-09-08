@@ -4,15 +4,36 @@ type Query{
 }
 
 type Mutation{
-    createBook(name: String, pageCount: Int):Book
-    createBookFull(book: BookIn):Book
-    updateBook(id: ID, name: String, pageCount:Int):Book
-    deleteBook(id: ID):Book
+    createBook(input: CreateBookInput):CreateBookPayload
+    updateBook(input: UpdateBookInput):UpdateBookPayload
+    deleteBook(input: DeleteBookInput):DeleteBookPayload
 }
 
-input BookIn{
+input CreateBookInput{
+    name: String!
+    pageCount: Int!
+}
+
+type CreateBookPayload{
+    book: Book
+}
+
+input UpdateBookInput{
+    id: ID!
     name: String
     pageCount: Int
+}
+
+type UpdateBookPayload{
+    book: Book
+}
+
+input DeleteBookInput{
+    id: ID!
+}
+
+type DeleteBookPayload{
+    book: Book
 }
 
 type Book {

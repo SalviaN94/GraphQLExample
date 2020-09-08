@@ -3,12 +3,16 @@ extend type Query{
 }
 
 extend type Mutation{
-    createAuthor(firstName: String, lastName: String):Author
+    createAuthor(input: CreateAuthorInput):CreateAuthorPayload
 }
 
-input AuthorIn{
+input CreateAuthorInput{
     firstName: String
     lastName: String
+}
+
+type CreateAuthorPayload{
+    author: Author
 }
 
 type Author {
