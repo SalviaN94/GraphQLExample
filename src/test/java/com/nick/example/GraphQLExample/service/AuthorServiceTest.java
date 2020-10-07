@@ -1,6 +1,6 @@
 package com.nick.example.GraphQLExample.service;
 
-import com.nick.example.GraphQLExample.Entity.Author;
+import com.nick.example.GraphQLExample.entity.Author;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

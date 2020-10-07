@@ -1,14 +1,11 @@
 package com.nick.example.GraphQLExample.service;
 
-import com.nick.example.GraphQLExample.Entity.Author;
+import com.nick.example.GraphQLExample.entity.Author;
 import com.nick.example.GraphQLExample.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

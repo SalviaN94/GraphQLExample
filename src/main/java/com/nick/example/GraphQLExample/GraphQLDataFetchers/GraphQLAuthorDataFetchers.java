@@ -1,7 +1,6 @@
 package com.nick.example.GraphQLExample.GraphQLDataFetchers;
 
-import com.nick.example.GraphQLExample.Entity.Author;
-import com.nick.example.GraphQLExample.Entity.Book;
+import com.nick.example.GraphQLExample.entity.Author;
 import com.nick.example.GraphQLExample.service.AuthorService;
 import graphql.schema.DataFetcher;
 import org.springframework.beans.factory.annotation.Autowired;

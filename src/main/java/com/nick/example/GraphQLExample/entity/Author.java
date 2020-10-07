@@ -1,4 +1,4 @@
-package com.nick.example.GraphQLExample.Entity;
+package com.nick.example.GraphQLExample.entity;
 
 import javax.persistence.*;
 import java.util.ArrayList;

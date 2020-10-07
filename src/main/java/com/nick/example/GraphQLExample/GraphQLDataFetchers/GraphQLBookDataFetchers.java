@@ -1,18 +1,12 @@
 package com.nick.example.GraphQLExample.GraphQLDataFetchers;
 
-import com.nick.example.GraphQLExample.Entity.Book;
-import com.nick.example.GraphQLExample.repository.BookRepository;
-import com.nick.example.GraphQLExample.service.AuthorService;
+import com.nick.example.GraphQLExample.entity.Book;
 import com.nick.example.GraphQLExample.service.BookService;
-import graphql.execution.DataFetcherResult;
 import graphql.schema.DataFetcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.xml.crypto.Data;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.Map;
 
 @Component
 public class GraphQLBookDataFetchers {
@@ -37,7 +31,7 @@ public class GraphQLBookDataFetchers {
     public DataFetcher createBookDataFetcher(){
         return dataFetchingEnvironment -> {
             LinkedHashMap<String, Object> book = dataFetchingEnvironment.getArgument("input");
-            Book createBook = bookService.createBook(new Book((String)book.get("name"), (Integer)book.get("pageCount")));
+            Book createBook = bookService.createBook(new Book((String)book.get("name"), (Integer)book.get("pageCount")), Long.parseLong((String)book.get("authorId")));
             LinkedHashMap<String, Object> returnedMap = new LinkedHashMap<>();
             returnedMap.put("book", createBook);
             return returnedMap;
